@@ -34,7 +34,10 @@ class AddressParser:
             package = 'pyap' + '.source_' + self.country + \
                 '.data'
             data = importlib.import_module(package)
-            self.rules = data.full_address
+            if self.rule_name == 'full_street':
+                self.rules = data.full_street
+            else:
+                self.rules = data.full_address
 
         except AttributeError:
             raise e.NoCountrySelected(
